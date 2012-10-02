@@ -13,7 +13,7 @@
 
 		<div class="span9">
 			<form method="post" action="<?php echo site_url("subjects/add"); ?>">
-				<legend>Add Subjects</legend>
+			 <h2 class="alert-info">Add Subjects</h2>
 			 	
 			 	<label>Subject Name</label>
 			  	<input type="text" name="name">
