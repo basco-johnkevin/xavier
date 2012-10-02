@@ -5,8 +5,8 @@
 	          <div class="well sidebar-nav">
 	            <ul class="nav nav-list">
 	              <li class="nav-header">Sidebar</li>
-	              <li class="active"><a href="<?php echo  site_url()?>/collegedepts/add">Add College Departments</a></li>
-	              <li ><a href="<?php echo  site_url()?>/collegedepts/">Manage College Departments</a></li>
+	              <li class="active"><a href="<?php echo  site_url()?>/enrollments/add">Add Enrollment Records</a></li>
+	              <li ><a href="<?php echo  site_url()?>/enrollments/">Manage Enrollment Records</a></li>
 	            </ul>
 	          </div><!--/.well -->
 	        </div><!--/span-->

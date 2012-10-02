@@ -2,11 +2,11 @@
 	<div class="row">
 
 		 <div class="span3">
-	          <div class="well sidebar-nav">
+	           <div class="well sidebar-nav">
 	            <ul class="nav nav-list">
 	              <li class="nav-header">Sidebar</li>
-	              <li><a href="<?php echo  site_url()?>/subjectsections/add">Add Subject Sections</a></li>
-	              <li class="active"><a href="<?php echo  site_url()?>/subjectsections">Manage Subject Sections</a></li>
+	              <li ><a href="<?php echo  site_url()?>/enrollments/add">Add Enrollment Records</a></li>
+	              <li class="active"><a href="<?php echo  site_url()?>/enrollments/">Manage Enrollment Records</a></li>
 	            </ul>
 	          </div><!--/.well -->
 	        </div><!--/span-->
