@@ -15,7 +15,6 @@
 
 		<div class="span9">
 				
-
 			<table class="table">
 
 		  	<!-- notices, success and error msgs -->
@@ -31,31 +30,30 @@
 			  	<?php echo validation_errors(); ?>
 			  	<!-- notices, success and error msgs ENDS -->
 
-			  <h2 class="alert-info">Manage Students</h2>
+			  
+
+			  	<h3 class="alert-info">Now viewing records of student number: <?php echo $student->student_number; ?></h3>
+
+			<h3>Subjects: </h3>
 			  <thead>
 			    <tr>
-			      <th width="10%">ID</th>
-			      <th width="50%">Name</th>
-			      <th width="20%">Student Number</th>
-			       <th width="20%">Commands</th>
+			      <th width="30%">Subject</th>
+			      <th width="30%">Schedule</th>
+			      <th width="30%">Department</th>
+
 			    </tr>
 			  </thead>
 			  <tbody>
-			   
+			   	<?php foreach ($student->enrollments as $enrollment): ?>
+				 <tr>
 
-				<?php foreach ($students as $student): ?>
-					 <tr>
-						<td><?php echo $student->studentid; ?></td>
-						<td><?php echo $student->name; ?></td>
-						<td><?php echo $student->student_number; ?></td>
-						<td><a href="<?php echo site_url()?>/students/edit/<?php echo $student->studentid; ?>">EDIT</a>
-							&nbsp;&nbsp;<a href="<?php echo  site_url()?>/students/delete/<?php echo $student->studentid; ?>">DELETE</a>
-							&nbsp;&nbsp;<a href="<?php echo  site_url()?>/students/subjects/<?php echo $student->studentid; ?>">SUBJECTS</a>
-						</td>
-					 </tr>
+						<td><?php echo $enrollment->subjectsection->subject->subjectname; ?></td>
+						<td><?php echo $enrollment->subjectsection->schedule; ?></td>
+						<td><?php echo $enrollment->subjectsection->subject->collegedept->collegedeptname; ?></td>
+
+			
+				 </tr>
 				<?php endforeach; ?>
-
-			   
 			  </tbody>
 			</table>
 			

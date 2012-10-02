@@ -5,8 +5,8 @@
 	          <div class="well sidebar-nav">
 	            <ul class="nav nav-list">
 	              <li class="nav-header">Sidebar</li>
-	              <li class="active"><a href="<?php echo  site_url()?>/collegedepts/add">Add College Departments</a></li>
-	              <li ><a href="<?php echo  site_url()?>/collegedepts/">Manage College Departments</a></li>
+	              <li class="active"><a href="<?php echo  site_url()?>/enrollments/add">Add Enrollment Records</a></li>
+	              <li ><a href="<?php echo  site_url()?>/enrollments/">Manage Enrollment Records</a></li>
 	            </ul>
 	          </div><!--/.well -->
 	        </div><!--/span-->
@@ -15,11 +15,20 @@
 		<div class="span9">
 				
 
-			<form method="post" action="<?php echo site_url("collegedepts/add"); ?>">
+			<form method="post" action="<?php echo site_url("enrollments/add"); ?>">
 		  <h2 class="alert-info">Add Enrollment Record</h2>
-	 	<label>Name</label>
-	  	<input type="text" name="name">
+	 	<label>Student</label>
+	  	
+	 	<?php echo form_dropdown('studentId', $studentIdsArray); ?>
+
 	  	<br>
+
+	  	<label>Subject Section Id</label>
+
+	  	<?php echo form_dropdown('subjectSectionId', $subjectSectionIdsArray); ?>
+
+	  	<br>
+
 	  	<button type="submit" class="btn">Submit</button>
 
 	  	<?php if (isset($notices)): ?>

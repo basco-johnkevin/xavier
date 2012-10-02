@@ -11,9 +11,29 @@ class Enrollments extends MY_Controller {
 
 	public function add()
 	{
+		//$this->output->enable_profiler(TRUE);
+
 		// rules
 		$this->form_validation->set_rules('studentId', 'student id', 'required|integer');
-		$this->form_validation->set_rules('subjectSectionId', 'subject section id', 'required|integer');
+		$this->form_validation->set_rules('subjectSectionId', 'subject section id', 'required|integer|callback_checkIfAlreadyEnrolled['.$this->input->post('studentId').']');
+
+		$students = Student::all();
+		$studentIdsArray = array();
+
+		foreach ($students as $student) {
+			$studentIdsArray[ $student->studentid ] = $student->studentid;
+		}
+
+		$this->data['studentIdsArray'] = $studentIdsArray;
+
+		$subjectSections = SubjectSection::all();
+		$subjectSectionIdsArray = array();
+
+		foreach ($subjectSections as $subjectSection) {
+			$subjectSectionIdsArray[ $subjectSection->subjectsectionid ] = $subjectSection->subjectsectionid;
+		}
+
+		$this->data['subjectSectionIdsArray'] = $subjectSectionIdsArray;
 
 		// validate
 		if ($this->form_validation->run() == FALSE)
@@ -65,16 +85,37 @@ class Enrollments extends MY_Controller {
 
 	public function delete($id)
 	{
-		$cD = CollegeDept::find_by_collegedeptid($id);
-		if ($cD->delete()) {
+		$e = Enrollment::find_by_enrollmentid($id);
+		if ($e->delete()) {
 			$this->session->set_flashdata('success', 'delete record sucessful!');
-			redirect('collegedepts/', 'refresh');
+			redirect('enrollments/', 'refresh');
 		} else {
 			$this->session->set_flashdata('error', 'delete record failed!');
-			redirect('collegedepts/', 'refresh');
+			redirect('enrollments/', 'refresh');
 		}
 	}
 	
+	// custom validation rule
+	public function checkIfAlreadyEnrolled($subjectSectionId, $studentId)
+	{
+		$this->output->enable_profiler(TRUE);
 
+		//$enrollment = Enrollment::find_by_subjectsectionid_and_studentid($subjectSectionId, $studentId);
+		$count = Enrollment::count(array('conditions' => array('subjectsectionid = ? AND studentid = ?', $subjectSectionId, $studentId)));
+		if ($count >= 1) {
+			$this->form_validation->set_message('checkIfAlreadyEnrolled', 'The student is already enrolled in the subject');
+			return FALSE;
+
+		}
+		return TRUE;
+
+		// echo $count;
+		// echo Enrollment::connection()->last_query;
+		// die();
+	}
+
+
+
+	
 
 }

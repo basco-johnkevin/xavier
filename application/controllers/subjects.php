@@ -63,7 +63,7 @@ class Subjects extends MY_Controller {
 	public function edit()
 	{
 
-		$this->output->enable_profiler(TRUE);
+		//$this->output->enable_profiler(TRUE);
 		
 		// rules
 		$this->form_validation->set_rules('name', 'subject name', 'required|max_length[30]|is_unique[subject.subjectname.subjectid.'.$this->input->post('id').']');

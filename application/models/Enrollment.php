@@ -13,8 +13,5 @@ class Enrollment extends ActiveRecord\Model {
 
 	
 
-
-
-
 }
 

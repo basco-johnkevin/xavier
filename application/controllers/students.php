@@ -79,6 +79,11 @@ class Students extends MY_Controller {
 		
 	}
 
+	public function subjects($id)
+	{
+		$this->data['student'] = Student::find_by_studentid($id);
+		$this->_render('pages/students/subjects');
 
+	}
 	
 }
