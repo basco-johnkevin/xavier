@@ -12,14 +12,17 @@ class Home extends MY_Controller {
 		
 		// $this->_render('pages/home');
 
-			$this->output->enable_profiler(TRUE);
+		//	$this->output->enable_profiler(TRUE);
 		// get all the products
-		$data['products'] = Product::get_products();
+	//	$data['products'] = Product::get_products();
 
 
-		print_r($data['products']);
+		//print_r($data['products']);
 		// render the view
 		//$this->load->view('home', $data);
+
+		$this->_render('pages/home');
+
 	}
 	
 }

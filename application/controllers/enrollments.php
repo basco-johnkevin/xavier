@@ -11,7 +11,7 @@ class Enrollments extends MY_Controller {
 
 	public function add()
 	{
-		$this->output->enable_profiler(TRUE);
+		//$this->output->enable_profiler(TRUE);
 
 		// rules
 		$this->form_validation->set_rules('studentId', 'student id', 'required|integer');

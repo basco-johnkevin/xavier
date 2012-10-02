@@ -71,7 +71,7 @@ class Subjectsections extends MY_Controller {
 	public function edit()
 	{
 
-		$this->output->enable_profiler(TRUE);
+		//$this->output->enable_profiler(TRUE);
 		
 		$subjectsArray = array();
 		$subjects = Subject::all();
@@ -113,7 +113,7 @@ class Subjectsections extends MY_Controller {
 
 	public function checkIfSubjectSectionAlreadyExists($schedule, $subjectId)
 	{
-		$this->output->enable_profiler(TRUE);
+		//$this->output->enable_profiler(TRUE);
 
 		$count = SubjectSection::count(array('conditions' => array('schedule = ? AND subjectid = ?', $schedule, $subjectId)));
 		
