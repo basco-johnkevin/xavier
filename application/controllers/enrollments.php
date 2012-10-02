@@ -15,6 +15,24 @@ class Enrollments extends MY_Controller {
 		$this->form_validation->set_rules('studentId', 'student id', 'required|integer');
 		$this->form_validation->set_rules('subjectSectionId', 'subject section id', 'required|integer');
 
+		$students = Student::all();
+		$studentIdsArray = array();
+
+		foreach ($students as $student) {
+			$studentIdsArray[ $student->studentid ] = $student->studentid;
+		}
+
+		$this->data['studentIdsArray'] = $studentIdsArray;
+
+		$subjectSections = SubjectSection::all();
+		$subjectSectionIdsArray = array();
+
+		foreach ($subjectSections as $subjectSection) {
+			$subjectSectionIdsArray[ $subjectSection->subjectsectionid ] = $subjectSection->subjectsectionid;
+		}
+
+		$this->data['subjectSectionIdsArray'] = $subjectSectionIdsArray;
+
 		// validate
 		if ($this->form_validation->run() == FALSE)
 		{
@@ -65,13 +83,13 @@ class Enrollments extends MY_Controller {
 
 	public function delete($id)
 	{
-		$cD = CollegeDept::find_by_collegedeptid($id);
-		if ($cD->delete()) {
+		$e = Enrollment::find_by_enrollmentid($id);
+		if ($e->delete()) {
 			$this->session->set_flashdata('success', 'delete record sucessful!');
-			redirect('collegedepts/', 'refresh');
+			redirect('enrollments/', 'refresh');
 		} else {
 			$this->session->set_flashdata('error', 'delete record failed!');
-			redirect('collegedepts/', 'refresh');
+			redirect('enrollments/', 'refresh');
 		}
 	}
 	

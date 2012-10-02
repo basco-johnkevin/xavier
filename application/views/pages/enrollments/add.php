@@ -15,11 +15,20 @@
 		<div class="span9">
 				
 
-			<form method="post" action="<?php echo site_url("collegedepts/add"); ?>">
+			<form method="post" action="<?php echo site_url("enrollments/add"); ?>">
 		  <h2 class="alert-info">Add Enrollment Record</h2>
-	 	<label>Name</label>
-	  	<input type="text" name="name">
+	 	<label>Student</label>
+	  	
+	 	<?php echo form_dropdown('studentId', $studentIdsArray); ?>
+
 	  	<br>
+
+	  	<label>Subject Section Id</label>
+
+	  	<?php echo form_dropdown('subjectSectionId', $subjectSectionIdsArray); ?>
+
+	  	<br>
+
 	  	<button type="submit" class="btn">Submit</button>
 
 	  	<?php if (isset($notices)): ?>
