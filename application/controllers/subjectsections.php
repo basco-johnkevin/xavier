@@ -13,7 +13,7 @@ class Subjectsections extends MY_Controller {
 	{
 		// rules
 		$this->form_validation->set_rules('subjectId', 'subject', 'required|integer');
-		$this->form_validation->set_rules('schedule', 'schedule', 'required');
+		$this->form_validation->set_rules('schedule', 'schedule', 'required|callback_checkIfSubjectSectionAlreadyExists['.$this->input->post('subjectId').']');
 
 		// validate
 		if ($this->form_validation->run() == FALSE)
@@ -109,6 +109,20 @@ class Subjectsections extends MY_Controller {
 			}
 		}
 		
+	}
+
+	public function checkIfSubjectSectionAlreadyExists($schedule, $subjectId)
+	{
+		$this->output->enable_profiler(TRUE);
+
+		$count = SubjectSection::count(array('conditions' => array('schedule = ? AND subjectid = ?', $schedule, $subjectId)));
+		
+		if ($count >= 1) {
+			$this->form_validation->set_message('checkIfSubjectSectionAlreadyExists', 'The subject already has this schedule');
+			return FALSE;
+		}
+
+		return TRUE;
 	}
 
 
