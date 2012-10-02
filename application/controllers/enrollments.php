@@ -11,9 +11,11 @@ class Enrollments extends MY_Controller {
 
 	public function add()
 	{
+		$this->output->enable_profiler(TRUE);
+
 		// rules
 		$this->form_validation->set_rules('studentId', 'student id', 'required|integer');
-		$this->form_validation->set_rules('subjectSectionId', 'subject section id', 'required|integer');
+		$this->form_validation->set_rules('subjectSectionId', 'subject section id', 'required|integer|callback_checkIfAlreadyEnrolled['.$this->input->post('studentId').']');
 
 		$students = Student::all();
 		$studentIdsArray = array();
@@ -93,6 +95,27 @@ class Enrollments extends MY_Controller {
 		}
 	}
 	
+	// custom validation rule
+	public function checkIfAlreadyEnrolled($subjectSectionId, $studentId)
+	{
+		$this->output->enable_profiler(TRUE);
 
+		//$enrollment = Enrollment::find_by_subjectsectionid_and_studentid($subjectSectionId, $studentId);
+		$count = Enrollment::count(array('conditions' => array('subjectsectionid = ? AND studentid = ?', $subjectSectionId, $studentId)));
+		if ($count >= 1) {
+			$this->form_validation->set_message('checkIfAlreadyEnrolled', 'The student is already enrolled in the subject');
+			return FALSE;
+
+		}
+		return TRUE;
+
+		// echo $count;
+		// echo Enrollment::connection()->last_query;
+		// die();
+	}
+
+
+
+	
 
 }
