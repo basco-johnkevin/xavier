@@ -1,0 +1,8 @@
+::-moz-selection { background: #fe57a1; color: #fff; text-shadow: none; }
+::selection { background: #fe57a1; color: #fff; text-shadow: none; }
+
+body{
+	padding-top:40px;
+}
+
+#main-con { margin-top: 50px; }
